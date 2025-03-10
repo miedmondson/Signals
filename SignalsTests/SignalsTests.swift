@@ -199,7 +199,7 @@ class SignalsTests: XCTestCase {
         
         emitter.onInt.fire(1)
 
-        XCTAssertEqual(emitter.onInt.observers.count, 0, "Weak observer should have been collected")
+        XCTAssertEqual(emitter.onInt.observersCount, 0, "Weak observer should have been collected")
     }
     
     func test_subscribePast() {

@@ -29,15 +29,10 @@ final public class Signal<T> {
     /// `retainLastFired`-property needs to be set to true
     public private(set) var lastDataFired: T? = nil
     
-    /// All the observers of to the `Signal`.
-    public var observers:[AnyObject] {
+    /// Number of observers of the `Signal`.
+    public var observersCount: Int {
         get {
-            return signalListeners.filter {
-                return $0.observer != nil
-                }.map {
-                    (signal) -> AnyObject in
-                    return signal.observer!
-            }
+            return signalListeners.count(where: { $0.observer != nil })
         }
     }
     

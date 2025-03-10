@@ -128,13 +128,13 @@ class SignalQueueTests: XCTestCase {
         emitter.onInt.subscribe(with: observer1!) { _ = $0 }
         emitter.onInt.subscribe(with: observer2!) { _ = $0 }
         
-        XCTAssertEqual(emitter.onInt.observers.count, 2, "Should have two observer")
+        XCTAssertEqual(emitter.onInt.observersCount, 2, "Should have two observer")
         
         observer1 = nil
-        XCTAssertEqual(emitter.onInt.observers.count, 1, "Should have one observer")
+        XCTAssertEqual(emitter.onInt.observersCount, 1, "Should have one observer")
         
         observer2 = nil
-        XCTAssertEqual(emitter.onInt.observers.count, 0, "Should have zero observer")
+        XCTAssertEqual(emitter.onInt.observersCount, 0, "Should have zero observer")
     }
 
     func testListeningOnDispatchQueue() {
