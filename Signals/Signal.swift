@@ -119,7 +119,7 @@ final public class Signal<T> {
         return signalListener
     }
     
-    /// Fires the `Singal`.
+    /// Fires the `Signal`.
     ///
     /// - parameter data: The data to fire the `Signal` with.
     public func fire(_ data: T) {
