@@ -133,12 +133,10 @@ final public class Signal<T> {
     ///
     /// - parameter observer: The observer whose subscriptions to cancel
     public func cancelSubscription(for observer: AnyObject) {
-        signalListeners = signalListeners.filter {
-            if let definiteListener:AnyObject = $0.observer {
-                return definiteListener !== observer
-            }
-            return false
-        }
+        signalListeners.removeAll(where: {
+            guard let listenerObserver:AnyObject = $0.observer else { return false }
+            return listenerObserver === observer
+        })
     }
     
     /// Cancels all subscriptions for the `Signal`.
@@ -154,17 +152,7 @@ final public class Signal<T> {
     // MARK: - Private Interface
     
     private func flushCancelledListeners() {
-        var removeListeners = false
-        for signalListener in signalListeners {
-            if signalListener.observer == nil {
-                removeListeners = true
-            }
-        }
-        if removeListeners {
-            signalListeners = signalListeners.filter {
-                return $0.observer != nil
-            }
-        }
+        signalListeners.removeAll(where: { $0.observer == nil })
     }
 }
 
